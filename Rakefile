@@ -5,7 +5,8 @@ task :new_kata, [:dir, :title] do |t, args|
   title = (args.title || get_stdin("Enter a title: ")).gsub(' ', '-')
   filename = "./#{directory}/#{Time.now.strftime('%y%m%d')}-#{title}.js"
 
-  Dir.mkdir directory
+  Dir.mkdir directory unless Dir.exists?(directory)
+
   if File.exist?(filename)
     abort("rake aborted!") if ask("#{filename} already exists. Do you want to overwrite?", ['y', 'n']) == 'n'
   end
