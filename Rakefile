@@ -12,7 +12,10 @@ task :new_kata, [:dir, :title] do |t, args|
   end
   puts "Creating new file: #{filename}"
   open(filename, 'w') do |post|
-    post.puts "##{filename}"
+    post.puts "/* #{filename}\n\n"
+    post.puts "*/\n\n"
+    post.puts "// TESTS ********"
+    post.puts "var assert = require('assert')"
   end
 end
 
