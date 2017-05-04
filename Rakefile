@@ -1,6 +1,6 @@
 # usage be rake new_kata["classification","title"]
 desc "Begin a new kata"
-task :new_kata, [:dir, :title] do |t, args|
+task :new_js_kata, [:dir, :title] do |t, args|
   directory = (args.dir || get_stdin("Enter a classification: ")).gsub(/\s+|\//, '-')
   title = (args.title || get_stdin("Enter a title: ")).gsub(' ', '-')
   filename = "./#{directory}/#{Time.now.strftime('%y%m%d')}-#{title}.js"
@@ -16,6 +16,12 @@ task :new_kata, [:dir, :title] do |t, args|
     post.puts "*/\n\n"
     post.puts "// TESTS ********"
     post.puts "var assert = require('assert')"
+    post.puts <<-eos
+describe('#{title}', () => {
+  xit('should do something', () => {})
+  xit('should do something', () => {})
+})
+eos
   end
 end
 
